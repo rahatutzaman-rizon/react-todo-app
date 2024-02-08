@@ -2,8 +2,8 @@
 
 const TodoList = () => {
     return (
-        <div>
-            
+        <div className="">
+             <h2>todo List</h2>
         </div>
     );
 };
