@@ -1,64 +1,89 @@
-import { useEffect, useState } from "react";
 
 
-const TodoList = () => {
+import React, { useEffect, useState } from "react";
+import "./todolist.css";
+import CheckIcon from "../icons/CheckIcon";
+import EditIcon from "../icons/EditIcon";
+import DeleteIcon from "../icons/DeleteIcon";
+import { storeDataLocal } from "../../utils/storage";
+const TodoList = ({ tasks, setTasks, filter, setTask }) => {
+  const [filteredTasks, setFilteredTasks] = useState();
 
-    const [filter, setFilter] = useState("all");
+  const handleClickAction = (id, action) => {
+    switch (action) {
+      case "markAsDone": {
+        const filterdTasks = tasks.map((item) =>
+          item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
+        );
+        setTasks(filterdTasks);
+        storeDataLocal("localTasks", filterdTasks);
 
-  const tasks = [
-    { id: 1, text: "Meet friend", isCompleted: true },
-    { id: 2, text: "Lunch meeting", isCompleted: false },
-    { id: 3, text: "Build app", isCompleted: false }
-  ];
-
-  const filteredTasks = tasks.filter(task => {
-    if(filter === "all") {
-      return true;
+        break;
+      }
+      case "delete": {
+        if (confirm(`Are you sure want to delete this task?`)) {
+          const filterdTasks = tasks.filter((item) => item.id !== id);
+          setTasks(filterdTasks);
+          storeDataLocal("localTasks", filterdTasks);
+        }
+      }
+      default:
+        break;
     }
-    if(filter === "complete" && task.isCompleted) {
-      return true;  
-    }
-    if(filter === "incomplete" && !task.isCompleted) {
-      return true;
-    }
-    return false;
-  });
-  
-    return (
-        <div className="mx-auto w-full">
-      <div className="mb-4 flex justify-center gap-4">
-        <button
-          className={`border p-2 ${filter === "all" ? "bg-black text-white" : ""}`} 
-          onClick={() => setFilter("all")}
-        >
-          All
-        </button>
-        <button
-          className={`border p-2 ${filter === "complete" ? "bg-black text-white" : ""}`}
-          onClick={() => setFilter("complete")}  
-        >
-          Complete
-        </button>
-        <button
-          className={`border p-2 ${filter === "incomplete" ? "bg-black text-white" : ""}`}
-          onClick={() => setFilter("incomplete")}
-        >
-          Incomplete
-        </button>
-      </div>
+  };
 
-      <ul>
-        {filteredTasks.map(task => (
-          <li key={task.id}>
-            <label>
-              <input type="checkbox" checked={task.isCompleted} />
-              <span>{task.text}</span>
-            </label>
-          </li>
-        ))}
+  useEffect(() => {
+    if (tasks?.length === 0) return;
+    let results;
+    console.log("filter", filter);
+    switch (filter) {
+      case "Active": {
+        results = tasks.filter((item) => !item?.isCompleted);
+        break;
+      }
+      case "Completed": {
+        results = tasks.filter((item) => item?.isCompleted);
+        break;
+      }
+      default:
+        results = tasks;
+        break;
+    }
+    setFilteredTasks(results);
+  }, [filter, tasks]);
+
+  return (
+    <div className="list_container">
+      <ul className="list_items">
+        {(!filteredTasks || filteredTasks?.length === 0) && (
+          <li className="list_item">No task available.</li>
+        )}
+        {filteredTasks &&
+          filteredTasks?.length > 0 &&
+          filteredTasks?.map((task) => (
+            <li className="list_item" key={`item_${task?.id}`}>
+              <div className="list_title">
+                <span onClick={() => handleClickAction(task?.id, "markAsDone")}>
+                  <CheckIcon checked={task?.isCompleted} />
+                </span>
+                {task?.title}
+              </div>
+              <div className="item_actions">
+                <span title="Edit" onClick={() => setTask(task)}>
+                  <EditIcon />
+                </span>
+                <span
+                  title="Delete"
+                  onClick={() => handleClickAction(task?.id, "delete")}
+                >
+                  <DeleteIcon />
+                </span>
+              </div>
+            </li>
+          ))}
       </ul>
     </div>
-    );
+  );
 };
 
 export default TodoList;
