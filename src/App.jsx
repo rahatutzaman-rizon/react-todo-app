@@ -52,7 +52,7 @@ function App() {
 <Home></Home>
       </div>
       <div className="container">
-      <div className="app_title">Todo App</div>
+     
       {message && <div className="alert success">{message}</div>}
       <TodoForm hanledeAddTask={hanledeAddTask} task={task} />
       <Tabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />

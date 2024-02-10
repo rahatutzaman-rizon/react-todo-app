@@ -60,7 +60,7 @@ const TodoList = ({ tasks, setTasks, filter, setTask }) => {
         {filteredTasks &&
           filteredTasks?.length > 0 &&
           filteredTasks?.map((task) => (
-            <li className="list_item" key={`item_${task?.id}`}>
+            <li className="list_item w-full sm:w-1/2 md:w-1/3 p-2" key={`item_${task?.id}`}>
               <div className="list_title">
                 <span onClick={() => handleClickAction(task?.id, "markAsDone")}>
                   <CheckIcon checked={task?.isCompleted} />

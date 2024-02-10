@@ -1,27 +1,33 @@
-Task: Todo List App
-Description:
-Your task is to create a simple Todo List application using React (reactjs/NextJS). The
-application should allow users to add, edit, and delete tasks. Additionally, tasks
-should have a status (completed or incomplete). Each task will also have a priority
-(low/ medium/ high). Each priority will have its own color which will indicate the
-task’s priority in the tasklist. The application should display tasks in an organized
-manner and provide basic functionality to manage them.
-Requirements:
-Task List Display:
-● Display a list of tasks with their respective status (completed or not
-completed).
-● Each task should have options to mark as completed or delete.
-● Include a counter for total tasks and completed tasks.
-Task Management:
-● Implement the ability to add a new task.
-● Implement the ability to edit an existing task.
-● Implement the ability to mark a task as completed.
-● Implement the ability to delete a task.
-Styling:
-● Style the application for a clean and user-friendly interface using HTML
-and CSS.
-● You can use a CSS framework like Bootstrap if you prefer.
-State Management:
-● Utilize React hooks (e.g., useState, useEffect) as needed.
-● Use any React state management tool to manage the application's
-data (if needed).
+# live site :
+# Todo App
+ ### feature:  add task ,checkbox if complete,edit task, delete task 
+
+## Here's a brief overview of how the code works and some potential improvements:
+
+# TodoList Component:
+
+This component handles displaying the list of tasks.
+It takes in props such as tasks, setTasks, filter, and setTask.
+It uses useState to manage state related to filtered tasks.
+The handleClickAction function handles actions like marking a task as done or deleting it.
+The useEffect hook is used to filter tasks based on the selected filter (All, Active, or Completed).
+
+## TodoForm Component:
+
+This component is responsible for adding or updating tasks.
+It utilizes useState to manage the input text and validation state.
+The handleSumbit function handles form submission and task addition/update.
+The useEffect hook is used to set the input text if the task prop changes.
+
+## Tabs Component:
+
+This component displays tabs for filtering tasks.
+It takes in selectedTab and setSelectedTab props.
+It generates tabs dynamically based on the tabs array.
+
+## App Component:
+
+This is the main component where state is managed and other components are rendered.
+It manages the list of tasks, selected tab, current task being edited, and success message state.
+It uses useEffect to initialize tasks from local storage when the component mounts.
+Components like TodoForm, Tabs, and TodoList are rendered within the App component.
