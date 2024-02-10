@@ -3,8 +3,8 @@ import "./App.css";
 import TodoForm from "./components/todoform/TodoForm";
 import Tabs from "./components/tabs/Tabs";
 import TodoList from "./components/todolist/TodoList";
-
-
+import { getRecordsfromLocal, storeDataLocal } from "./utils/storage";
+import Home from "./components/Home";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -31,7 +31,7 @@ function App() {
       alertMessage = `Task has been added successfully!`;
     }
     setTasks(availableTasks);
-    
+    storeDataLocal("localTasks", availableTasks);
     setTask();
     setMessage(alertMessage);
     setTimeout(() => {
@@ -39,9 +39,19 @@ function App() {
     }, 5000);
   };
 
+  useEffect(() => {
+    const records = getRecordsfromLocal("localTasks");
+    if (records) {
+      setTasks(records);
+    }
+  }, []);
 
   return (
-    <div className="container">
+    <div>
+      <div>
+<Home></Home>
+      </div>
+      <div className="container">
       <div className="app_title">Todo App</div>
       {message && <div className="alert success">{message}</div>}
       <TodoForm hanledeAddTask={hanledeAddTask} task={task} />
@@ -52,6 +62,7 @@ function App() {
         filter={selectedTab}
         setTask={setTask}
       />
+    </div>
     </div>
   );
 }

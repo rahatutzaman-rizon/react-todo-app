@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import "./todolist.css";
 import CheckIcon from "../icons/CheckIcon";
 import EditIcon from "../icons/EditIcon";
 import DeleteIcon from "../icons/DeleteIcon";
-
+import { storeDataLocal } from "../../utils/storage";
 const TodoList = ({ tasks, setTasks, filter, setTask }) => {
   const [filteredTasks, setFilteredTasks] = useState();
 
@@ -14,14 +14,15 @@ const TodoList = ({ tasks, setTasks, filter, setTask }) => {
           item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
         );
         setTasks(filterdTasks);
-       
+        storeDataLocal("localTasks", filterdTasks);
+
         break;
       }
       case "delete": {
         if (confirm(`Are you sure want to delete this task?`)) {
           const filterdTasks = tasks.filter((item) => item.id !== id);
           setTasks(filterdTasks);
-        
+          storeDataLocal("localTasks", filterdTasks);
         }
       }
       break;
@@ -51,7 +52,7 @@ const TodoList = ({ tasks, setTasks, filter, setTask }) => {
   }, [filter, tasks]);
 
   return (
-    <div className="list_container">
+    <div className="w-full bg-sky-100">
       <ul className="list_items">
         {(!filteredTasks || filteredTasks?.length === 0) && (
           <li className="list_item">No task available.</li>
