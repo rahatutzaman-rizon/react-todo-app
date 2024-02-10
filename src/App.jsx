@@ -7,10 +7,12 @@ import TodoList from "./Components/TodoList/TodoList"
 function App() {
   return (
     <>
-     <div className="flex gap-6 text-center bg-green-100 h-24">
-     <TodoList></TodoList>
+     <div className=" gap-6 text-center bg-green-100 h-24 mt-6">
      <TodoForm></TodoForm>
      <Tabs></Tabs>
+     <TodoList></TodoList>
+     
+     
      
    
      </div>
