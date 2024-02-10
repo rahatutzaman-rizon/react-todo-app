@@ -8,9 +8,11 @@ function App() {
   return (
     <>
      <div className="flex gap-6 text-center bg-green-100 h-24">
-     <Tabs></Tabs>
-     <TodoForm></TodoForm>
      <TodoList></TodoList>
+     <TodoForm></TodoForm>
+     <Tabs></Tabs>
+     
+   
      </div>
     </>
   )
