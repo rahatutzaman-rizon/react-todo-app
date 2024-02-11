@@ -1,6 +1,8 @@
 # live site :  https://sparkly-semolina-058947.netlify.app/
 # Todo App
- ### feature:  add task ,checkbox if complete,edit task, delete task 
+ ### feature:  add task ,checkbox if complete,edit task, delete task ,local storage to save data ,add priority of task,total task .
+
+
 
 ## Here's a brief overview of how the code works and some potential improvements:
 
@@ -10,7 +12,7 @@ This component handles displaying the list of tasks.
 It takes in props such as tasks, setTasks, filter, and setTask.
 It uses useState to manage state related to filtered tasks.
 The handleClickAction function handles actions like marking a task as done or deleting it.
-The useEffect hook is used to filter tasks based on the selected filter (All, Active, or Completed).
+The useEffect hook is used to filter tasks based on the selected filter (All, Active, or Completed).and add priority list that user can choose their higher priority and show total task.
 
 ## TodoForm Component:
 
@@ -31,3 +33,7 @@ This is the main component where state is managed and other components are rende
 It manages the list of tasks, selected tab, current task being edited, and success message state.
 It uses useEffect to initialize tasks from local storage when the component mounts.
 Components like TodoForm, Tabs, and TodoList are rendered within the App component.
+
+## Deployment: Netlify 
+## Tools : Css framework :Tailwindcss ,React 
+## Roadmap: In future I can use this project for dynamic system and store in database 

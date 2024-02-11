@@ -30,7 +30,7 @@ const Home = () => {
             </ul>
           </div>
           <a className="btn btn-success normal-case text-xl text-bold text-white rounded-lg border-8">
-            Qtec Solution 
+        Rahatutzaman Rizon
           </a>
         </div>
 
